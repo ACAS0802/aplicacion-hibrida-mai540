@@ -42,3 +42,17 @@ def test_regla_tono_medio_detecta_alto():
     texto = "El modelo estima una probabilidad de crédito malo del 37%, lo cual es alto para una persona de 43 años."
     datos = {"edad": 43, "duración (meses)": 12, "monto": 4843, "cuenta corriente": "saldo negativo", "vivienda": "alquilada"}
     assert any("probabilidad es media" in p for p in verificar_explicacion(texto, datos, 0.37))
+
+
+# --- Que no rechacen lo correcto (falsos positivos) ------------------------------------------------------
+
+def test_tono_medio_acepta_una_negacion():
+    texto = "El modelo estima 41% de probabilidad de crédito malo: un riesgo medio, no alto, por el saldo negativo."
+    assert verificar_explicacion(texto, DATOS_4, 0.41) == []
+
+
+def test_ningun_texto_de_respaldo_es_rechazado():
+    predictor, X_pru, _ = entrenar_predictor()
+    for i in range(len(X_pru)):                                  # las 200 solicitudes de prueba
+        datos, prob = datos_legibles(X_pru.iloc[i]), probabilidad_malo(predictor, X_pru, i)
+        assert verificar_explicacion(explicacion_segura(datos, prob), datos, prob) == [], f"solicitud {i}"
