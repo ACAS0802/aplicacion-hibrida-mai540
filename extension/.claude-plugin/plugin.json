@@ -1,0 +1,8 @@
+{
+  "name": "costo-de-riesgo",
+  "version": "1.0.0",
+  "description": "Un comando que traduce los errores del predictor a costo para elegir el umbral de rechazo, y un agente que revisa los cambios antes de un commit buscando lo que las pruebas no cubren.",
+  "author": {
+    "name": "Araceli Castillo · MAI 540"
+  }
+}
