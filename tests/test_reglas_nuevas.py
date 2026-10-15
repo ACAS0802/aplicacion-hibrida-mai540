@@ -33,3 +33,12 @@ def test_regla_datos_detecta_rasgo_inventado():
 def test_regla_datos_detecta_vivienda_contradicha():
     texto = "El modelo estima 41% de probabilidad de crédito malo; la persona vive en una vivienda alquilada."
     assert any("vivienda «alquilada»" in p for p in verificar_explicacion(texto, DATOS_4, 0.41))
+
+
+# --- Regla 2: el tono entre 30% y 60% --------------------------------------------------------------------
+
+def test_regla_tono_medio_detecta_alto():
+    # Solicitud 12: 37% y dice «alto».
+    texto = "El modelo estima una probabilidad de crédito malo del 37%, lo cual es alto para una persona de 43 años."
+    datos = {"edad": 43, "duración (meses)": 12, "monto": 4843, "cuenta corriente": "saldo negativo", "vivienda": "alquilada"}
+    assert any("probabilidad es media" in p for p in verificar_explicacion(texto, datos, 0.37))

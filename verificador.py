@@ -38,7 +38,7 @@ def explicacion_segura(datos, prob):
 
 
 # ---------------------------------------------------------------------------------------------------------
-# Tarea 7.2 · Reglas nuevas. Usan límites de palabra (\b) para que, por ejemplo, «bajo» no coincida
+# Tarea 7.2 · Dos reglas nuevas. Usan límites de palabra (\b) para que, por ejemplo, «bajo» no coincida
 # dentro de «trabajo» ni «alta» dentro de «faltan».
 
 # Qué frase del texto corresponde a cada valor de los datos (los mismos valores que produce datos.py).
@@ -77,10 +77,18 @@ def verificar_datos(texto, datos):
     return problemas
 
 
+def verificar_tono_medio(texto, prob):
+    """Regla nueva 2: con probabilidad entre 30% y 60% (riesgo medio), el texto no debe calificar el riesgo de alto ni de bajo."""
+    if not 0.30 <= prob <= 0.60:                             # mismas franjas que verificar_tono y explicacion_segura
+        return []
+    extremos = sorted(set(re.findall(r"\b(?:alto|alta|elevad[oa]|bajo|baja|m[ií]nim[oa])\b", texto.lower())))
+    return [f"la probabilidad es media ({prob:.0%}), pero el texto dice «{p}»" for p in extremos]
+
+
 def verificar_explicacion(texto, datos, prob, reglas_nuevas=True):
     """Reúne todas las verificaciones. Lista vacía = el texto se puede mostrar.
     Con reglas_nuevas=False aplica solo las reglas de clase (sirve para medir el antes y el después)."""
     problemas = verificar_numeros(texto, datos, prob) + verificar_tono(texto, prob)
     if reglas_nuevas:
-        problemas += verificar_datos(texto, datos)
+        problemas += verificar_datos(texto, datos) + verificar_tono_medio(texto, prob)
     return problemas
