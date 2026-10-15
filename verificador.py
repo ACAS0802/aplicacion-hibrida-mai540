@@ -37,6 +37,50 @@ def explicacion_segura(datos, prob):
     return f"El modelo estima una probabilidad de {prob:.0%} de que el crédito sea malo (riesgo {nivel}). Datos: {detalle}."
 
 
-def verificar_explicacion(texto, datos, prob):
-    """Reúne todas las verificaciones. Lista vacía = el texto se puede mostrar."""
-    return verificar_numeros(texto, datos, prob) + verificar_tono(texto, prob)
+# ---------------------------------------------------------------------------------------------------------
+# Tarea 7.2 · Reglas nuevas. Usan límites de palabra (\b) para que, por ejemplo, «bajo» no coincida
+# dentro de «trabajo» ni «alta» dentro de «faltan».
+
+# Qué frase del texto corresponde a cada valor de los datos (los mismos valores que produce datos.py).
+CUENTA_EN_TEXTO = {
+    "saldo negativo": r"(?<!sin )(?<!no tiene )(?<!no tiene un )saldo negativo|n[uú]meros rojos|sobregir",
+    "saldo entre 0 y 200": r"saldo entre 0 y 200",
+    "saldo de 200 o más": r"saldo de 200 o m[aá]s|saldo (?:superior|mayor) a 200",
+    "sin cuenta corriente": r"sin cuenta corriente|no tiene cuenta corriente",
+}
+NIEGA_SALDO_NEGATIVO = r"sin saldo negativo|no tiene (?:un )?saldo negativo"
+VIVIENDA_EN_TEXTO = {
+    "propia": r"\bvivienda propia\b|\bpropiedad propia\b|\bpropietari[oa]\b|\bcasa propia\b",
+    "alquilada": r"\balquil\w*",
+    "sin costo": r"\bsin costo\b|\bgratuit[oa]\b",
+}
+# Rasgos de la persona que la solicitud no trae: si el texto los menciona, los inventó.
+SIN_DATO = r"\b(?:persona sola|solter[oa]|casad[oa]|divorciad[oa]|viud[oa]|hij[oa]s|familia|desemplead[oa]|empleo|trabajo|salario|sueldo|ingresos?|salud)\b"
+
+
+def verificar_datos(texto, datos):
+    """Regla nueva 1: lo que el texto afirma de la cuenta corriente, la vivienda o la persona debe coincidir con los datos."""
+    t = texto.lower()
+    problemas = []
+    cuenta = datos.get("cuenta corriente")
+    for valor, patron in CUENTA_EN_TEXTO.items():
+        if valor != cuenta and re.search(patron, t):
+            problemas.append(f"el texto dice «{valor}», pero el dato de cuenta corriente es «{cuenta}»")
+    if cuenta == "saldo negativo" and re.search(NIEGA_SALDO_NEGATIVO, t):
+        problemas.append("el texto niega el saldo negativo, pero el dato de cuenta corriente es «saldo negativo»")
+    vivienda = datos.get("vivienda")
+    for valor, patron in VIVIENDA_EN_TEXTO.items():
+        if valor != vivienda and re.search(patron, t):
+            problemas.append(f"el texto dice vivienda «{valor}», pero el dato es «{vivienda}»")
+    for rasgo in sorted(set(re.findall(SIN_DATO, t))):
+        problemas.append(f"afirmación sin dato que la respalde: «{rasgo}»")
+    return problemas
+
+
+def verificar_explicacion(texto, datos, prob, reglas_nuevas=True):
+    """Reúne todas las verificaciones. Lista vacía = el texto se puede mostrar.
+    Con reglas_nuevas=False aplica solo las reglas de clase (sirve para medir el antes y el después)."""
+    problemas = verificar_numeros(texto, datos, prob) + verificar_tono(texto, prob)
+    if reglas_nuevas:
+        problemas += verificar_datos(texto, datos)
+    return problemas
