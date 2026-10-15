@@ -1,11 +1,24 @@
 #!/bin/sh
-# Hook de Git: se ejecuta solo, antes de cada commit, y lo cancela si las pruebas fallan.
+# Hook de Git: se ejecuta solo, antes de cada commit, y lo cancela si algo falla.
 if [ -x ".venv/bin/python" ]; then PY=".venv/bin/python"            # Mac y Linux
 elif [ -x ".venv/Scripts/python.exe" ]; then PY=".venv/Scripts/python.exe"   # Windows
 else PY="python"; fi
+
+# Comprobación 1 (de clase): las pruebas automáticas.
 echo "Ejecutando las pruebas antes del commit..."
 "$PY" -m pytest -q
 if [ $? -ne 0 ]; then
   echo "Las pruebas fallaron: commit cancelado."
   exit 1
 fi
+
+# Comprobación 2 (propia): la extensión debe conservar su estructura.
+# pytest no revisa la carpeta extension/: un manifiesto roto o un comando sin `description`
+# pasaría todas las pruebas y solo se notaría al cargar el plugin en Claude Code.
+echo "Revisando la estructura de la extensión..."
+"$PY" verificar_extension.py
+if [ $? -ne 0 ]; then
+  echo "La extensión tiene problemas: commit cancelado."
+  exit 1
+fi
+echo "Todo en orden: el commit continúa."
