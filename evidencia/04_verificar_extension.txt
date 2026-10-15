@@ -1,0 +1,6 @@
+(.venv) $ python verificar_extension.py
+OK   manifiesto: costo-de-riesgo
+OK   comando: /costo-de-riesgo:umbral
+OK   agente: revisor-de-commits
+La extensión tiene una estructura válida.
+

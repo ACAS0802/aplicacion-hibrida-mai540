@@ -1,0 +1,44 @@
+(.venv) $ git diff
+diff --git a/verificador.py b/verificador.py
+index b562555..84c1256 100644
+--- a/verificador.py
++++ b/verificador.py
+@@ -19,7 +19,7 @@ def verificar_tono(texto, prob):
+     """Devuelve una lista de problemas: el tono no coincide con la probabilidad, o hay afirmaciones absolutas."""
+     t = texto.lower()                                        # minúsculas para comparar
+     problemas = []
+-    if prob < 0.30 and any(p in t for p in ("alto", "elevado")):
++    if prob < 0.99 and any(p in t for p in ("alto", "elevado")):
+         problemas.append("dice que el riesgo es alto, pero la probabilidad es baja")
+     if prob > 0.60 and any(p in t for p in ("bajo", "mínimo")):
+         problemas.append("dice que el riesgo es bajo, pero la probabilidad es alta")
+
+(.venv) $ git commit -am "Cambio de prueba: umbral roto a propósito"
+Ejecutando las pruebas antes del commit...
+...F.                                                                    [100%]
+=================================== FAILURES ===================================
+________________ test_explicacion_segura_solo_cita_lo_permitido ________________
+
+    def test_explicacion_segura_solo_cita_lo_permitido():
+        texto = explicacion_segura(DATOS, 0.78)
+>       assert verificar_explicacion(texto, DATOS, 0.78) == []         # el texto de respaldo siempre pasa
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert ['dice que el...idad es baja'] == []
+E         
+E         Left contains one more item: 'dice que el riesgo es alto, pero la probabilidad es baja'
+E         Use -v to get more diff
+
+tests/test_hibrido.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_hibrido.py::test_explicacion_segura_solo_cita_lo_permitido
+1 failed, 4 passed in 2.21s
+Las pruebas fallaron: commit cancelado.
+
+(.venv) $ git log --oneline
+5ed6b44 Completa TODO 1 a 11 del instructivo
+e86f3f8 Proyecto base Demo_Hibrido incompleto de la Clase 7
+
+(.venv) $ git checkout verificador.py && git status --short && echo 'verificador.py restaurado'
+Updated 1 path from the index
+verificador.py restaurado
+

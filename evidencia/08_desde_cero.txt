@@ -1,0 +1,17 @@
+$ git clone Demo_Hibrido carpeta_limpia && cd carpeta_limpia
+
+$ python -m pytest -q
+.......                                                                  [100%]
+7 passed in 2.41s
+
+$ python verificar_extension.py
+OK   manifiesto: costo-de-riesgo
+OK   comando: /costo-de-riesgo:umbral
+OK   agente: revisor-de-commits
+La extensión tiene una estructura válida.
+
+$ python tareas.py costo | tail -3
+Referencia «aprobar a todos»: costo 300
+Umbral 0.50 (el que usa predict): costo 194
+Umbral de menor costo: 0.30 con costo 96 y exactitud 0.7
+

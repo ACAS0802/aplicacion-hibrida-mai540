@@ -1,0 +1,5 @@
+$ claude --plugin-dir extension -p "/costo-de-riesgo:umbral"
+1. El umbral 0.50 que usa `predict` cuesta 194, y el de menor costo (0.30) cuesta 96, es decir 98 menos.
+2. Se rechazan 42 buenos de más (51 frente a 9), pero se aprueban 28 malos menos (9 frente a 37), y la exactitud baja de 0.770 a 0.700.
+3. Sí: 96 queda muy por debajo de la referencia «aprobar a todos» (300), aunque 0.15 y 0.20 (102) y 0.25 (106) también la superan con holgura.
+4. El umbral se eligió con los mismos 200 casos con que se mide, así que ese 96 es optimista. Para confirmarlo haría falta validación cruzada o una muestra distinta que no se haya usado para elegirlo.

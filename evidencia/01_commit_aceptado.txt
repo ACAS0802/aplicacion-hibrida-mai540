@@ -1,0 +1,16 @@
+(.venv) $ python instalar_hook.py
+Hook instalado: ahora las pruebas se ejecutan antes de cada commit.
+
+(.venv) $ git add predictor.py red_neuronal.py explicador.py verificador.py tests/test_hibrido.py
+
+(.venv) $ git commit -m "Completa TODO 1 a 11 del instructivo"
+Ejecutando las pruebas antes del commit...
+.....                                                                    [100%]
+5 passed in 2.12s
+[main 5ed6b44] Completa TODO 1 a 11 del instructivo
+ 5 files changed, 60 insertions(+), 22 deletions(-)
+
+(.venv) $ git log --oneline
+5ed6b44 Completa TODO 1 a 11 del instructivo
+e86f3f8 Proyecto base Demo_Hibrido incompleto de la Clase 7
+

@@ -1,0 +1,20 @@
+(.venv) $ python tareas.py costo
+        malos aprobados  buenos rechazados  costo  exactitud
+umbral                                                      
+0.10                  1                113    118      0.430
+0.15                  2                 92    102      0.530
+0.20                  5                 77    102      0.590
+0.25                  8                 66    106      0.630
+0.30                  9                 51     96      0.700
+0.35                 18                 37    127      0.725
+0.40                 24                 23    143      0.765
+0.50                 37                  9    194      0.770
+0.60                 44                  3    223      0.765
+
+Referencia «aprobar a todos»: costo 300
+Umbral 0.50 (el que usa predict): costo 194
+Umbral de menor costo: 0.30 con costo 96 y exactitud 0.7
+
+(.venv) $ python tareas.py
+Uso: python tareas.py evaluar | auditar | probar | costo
+

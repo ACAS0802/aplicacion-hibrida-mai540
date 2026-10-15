@@ -1,0 +1,18 @@
+(.venv) $ python instalar_hook.py
+Hook instalado: ahora las pruebas se ejecutan antes de cada commit.
+
+(.venv) $ git add hooks/pre-commit
+
+(.venv) $ git commit -m "Amplía el hook: también ejecuta verificar_extension.py"
+Ejecutando las pruebas antes del commit...
+.......                                                                  [100%]
+7 passed in 2.69s
+Revisando la estructura de la extensión...
+OK   manifiesto: costo-de-riesgo
+OK   comando: /costo-de-riesgo:umbral
+OK   agente: revisor-de-commits
+La extensión tiene una estructura válida.
+Todo en orden: el commit continúa.
+[main 34c883c] Amplía el hook: también ejecuta verificar_extension.py
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+

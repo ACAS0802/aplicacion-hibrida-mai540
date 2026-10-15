@@ -1,0 +1,10 @@
+(.venv) $ git log --oneline
+efdcdaa Documenta en el README el comando, el hook y la extensión de la Tarea 7.1
+34c883c Amplía el hook: también ejecuta verificar_extension.py
+80b8825 Agrega el agente revisor-de-commits a la extensión
+e4280e2 Crea la extensión costo-de-riesgo con su manifiesto y el comando umbral
+16f182a Agrega dos pruebas del comando costo
+16d6fbf Agrega el comando propio costo a tareas.py
+5ed6b44 Completa TODO 1 a 11 del instructivo
+e86f3f8 Proyecto base Demo_Hibrido incompleto de la Clase 7
+

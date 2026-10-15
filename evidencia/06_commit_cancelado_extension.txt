@@ -1,0 +1,33 @@
+(.venv) $ git diff
+diff --git a/extension/commands/umbral.md b/extension/commands/umbral.md
+index 4972f66..df38a92 100644
+--- a/extension/commands/umbral.md
++++ b/extension/commands/umbral.md
+@@ -1,5 +1,5 @@
+ ---
+-description: Calcula el costo de los errores del predictor con cada umbral de rechazo y recomienda uno, con sus límites
++descripcion: Calcula el costo de los errores del predictor con cada umbral de rechazo y recomienda uno, con sus límites
+ allowed-tools: Bash(python tareas.py costo:*)
+ ---
+ 
+
+(.venv) $ git commit -am "Cambio de prueba: encabezado del comando roto"
+Ejecutando las pruebas antes del commit...
+.......                                                                  [100%]
+7 passed in 2.77s
+Revisando la estructura de la extensión...
+OK   manifiesto: costo-de-riesgo
+OK   agente: revisor-de-commits
+FALTA commands/umbral.md: falta `description` en el encabezado
+La extensión tiene problemas: commit cancelado.
+
+(.venv) $ git log --oneline -1
+34c883c Amplía el hook: también ejecuta verificar_extension.py
+
+(.venv) $ git checkout extension/commands/umbral.md && python verificar_extension.py
+Updated 1 path from the index
+OK   manifiesto: costo-de-riesgo
+OK   comando: /costo-de-riesgo:umbral
+OK   agente: revisor-de-commits
+La extensión tiene una estructura válida.
+
