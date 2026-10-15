@@ -1,0 +1,5 @@
+Red neuronal: capas [61, 16, 8, 1], 1,137 pesos aprendidos
+Modelo           Exactitud ent.  Exactitud prueba  Malos detectados  Ajuste (s)
+Red neuronal              1.000             0.735             0.533        3.60
+Random Forest             1.000             0.770             0.383        0.46
+Las dos predicen lo mismo en 78% de las 200 solicitudes. Referencia «siempre bueno»: 0.700

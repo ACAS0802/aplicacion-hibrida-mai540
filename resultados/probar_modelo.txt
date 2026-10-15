@@ -1,0 +1,3 @@
+Modelo cargado en 27.5 s
+Respuesta (2.6 s): Un crédito bancario es una transacción donde el banco otorga dinero a un cliente sin necesidad de tener la moneda original.
+LISTO: el modelo funciona.
