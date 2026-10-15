@@ -1,0 +1,22 @@
+Sol.  Prob.  Antes    Después  Motivos nuevos
+1       26%  rechaza  rechaza  
+2       25%  rechaza  rechaza  
+3       56%  pasa     rechaza  texto contra datos (nueva), tono medio (nueva)
+4       41%  pasa     rechaza  texto contra datos (nueva), tono medio (nueva)
+5       42%  rechaza  rechaza  tono medio (nueva)
+6       20%  pasa     pasa     
+7       36%  pasa     rechaza  tono medio (nueva)
+8       43%  pasa     rechaza  texto contra datos (nueva), tono medio (nueva)
+9       40%  pasa     pasa     
+10      28%  rechaza  rechaza  
+11       4%  rechaza  rechaza  
+12      37%  pasa     rechaza  tono medio (nueva)
+
+Rechazadas: antes 5 de 12; después 10 de 12
+Solicitudes rechazadas por cada regla (una solicitud puede tener varios motivos):
+  números (clase)              antes  3   después  3
+  tono bajo/alto (clase)       antes  2   después  2
+  texto contra datos (nueva)   antes  0   después  3
+  tono medio (nueva)           antes  0   después  6
+
+Falsos positivos sobre los 200 textos de respaldo (correctos por construcción): 0
