@@ -1,0 +1,18 @@
+(.venv) $ python -m pytest -v | tail -16
+
+tests/test_costo.py::test_tabla_costos_cuenta_bien_un_caso_pequeno PASSED [  7%]
+tests/test_costo.py::test_predictor_cuesta_menos_que_aprobar_a_todos PASSED [ 15%]
+tests/test_hibrido.py::test_texto_correcto_pasa PASSED                   [ 23%]
+tests/test_hibrido.py::test_detecta_un_dato_inventado PASSED             [ 30%]
+tests/test_hibrido.py::test_detecta_tono_incoherente PASSED              [ 38%]
+tests/test_hibrido.py::test_explicacion_segura_solo_cita_lo_permitido PASSED [ 46%]
+tests/test_hibrido.py::test_probabilidad_entre_cero_y_uno PASSED         [ 53%]
+tests/test_reglas_nuevas.py::test_regla_datos_detecta_cuenta_contradicha PASSED [ 61%]
+tests/test_reglas_nuevas.py::test_regla_datos_detecta_rasgo_inventado PASSED [ 69%]
+tests/test_reglas_nuevas.py::test_regla_datos_detecta_vivienda_contradicha PASSED [ 76%]
+tests/test_reglas_nuevas.py::test_regla_tono_medio_detecta_alto PASSED   [ 84%]
+tests/test_reglas_nuevas.py::test_tono_medio_acepta_una_negacion PASSED  [ 92%]
+tests/test_reglas_nuevas.py::test_ningun_texto_de_respaldo_es_rechazado PASSED [100%]
+
+============================== 13 passed in 6.87s ==============================
+

@@ -58,6 +58,19 @@ python instalar_hook.py
 
 La evidencia (commits aceptados y cancelados, salida de `verificar_extension.py`) está en `evidencia/`.
 
+## Tarea 7.2 · Verificación ampliada
+
+| Archivo | Qué hace |
+|---|---|
+| `comparar_modelos.py` | Red neuronal frente al Random Forest sobre las mismas 200 solicitudes de prueba |
+| `main.py` | Ahora recorre 12 solicitudes (`python main.py 20` para otro número) y guarda los textos en `resultados/explicaciones.json` |
+| `verificador.py` | Dos reglas nuevas: `verificar_datos` (texto contra datos) y `verificar_tono_medio` (franja 30 %–60 %) |
+| `tests/test_reglas_nuevas.py` | 6 pruebas: 4 que fallan con el verificador de clase y 2 de falsos positivos |
+| `medir_rechazos.py` | Rechazos antes y después sobre los mismos textos, y falsos positivos en los 200 textos de respaldo |
+
+Resultado: rechazos 5 de 12 antes y 10 de 12 después; 0 falsos positivos en los textos de respaldo; 13 pruebas pasan.
+Los textos se generaron en mi Mac (`resultados/main_antes.txt`). La evidencia está en `evidencia72/`.
+
 ## Cómo se completa
 
 Cada `TODO n` marca un bloque que se escribe en clase. Para verificar cada paso:

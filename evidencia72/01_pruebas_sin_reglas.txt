@@ -1,0 +1,11 @@
+(.venv) $ git show 54dcf4c:verificador.py > /tmp/verificador_clase.py   # el verificador de clase, sin reglas nuevas
+(.venv) $ cp /tmp/verificador_clase.py verificador.py && python -m pytest -q tests/test_reglas_nuevas.py | tail -6
+=========================== short test summary info ============================
+FAILED tests/test_reglas_nuevas.py::test_regla_datos_detecta_cuenta_contradicha
+FAILED tests/test_reglas_nuevas.py::test_regla_datos_detecta_rasgo_inventado
+FAILED tests/test_reglas_nuevas.py::test_regla_datos_detecta_vivienda_contradicha
+FAILED tests/test_reglas_nuevas.py::test_regla_tono_medio_detecta_alto - asse...
+4 failed, 2 passed in 6.19s
+
+(.venv) $ git checkout verificador.py && python -m pytest -q tests/test_reglas_nuevas.py | tail -1
+6 passed in 6.41s
